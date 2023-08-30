@@ -1,0 +1,31 @@
+% Finished mode.
+% \documentclass[nocolor]{article}
+% \documentclass{article}
+
+% Draft mode.
+% \documentclass[working,nocolor]{article}
+\documentclass[working]{article}
+
+\input{preamble.tex}
+
+\usepackage{lipsum} % For random text. You don't need this.
+
+\title{CSE 486 A}
+\author{Emil Sayahi}
+\date{\today}
+
+\newcommand{\linktootherpages}{https://github.com/emmyoh}
+\newcommand{\shortlinkname}{my GitHub profile}
+\newcommand{\term}{Fall Term}
+\newcommand{\academicyear}{$2023$}
+\newcommand{\faculty}{Miami University}
+
+\begin{document}
+  \createintro
+
+  % start lectures
+  \input{lectures/lec-01.tex}
+  % end lectures
+
+  \listnotes
+\end{document}
