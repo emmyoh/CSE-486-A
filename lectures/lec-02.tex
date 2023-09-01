@@ -1,0 +1,95 @@
+\lesson{Fri, 1 September 2023, 11:40am -- 1:00pm}{Week 1, Friday}
+
+\begin{definition}
+    \textbf{Uninformed search} is a search strategy that uses no problem-specific knowledge. Only the goal test and the successor function are used; the \textbf{successor function} generates all possible states. It is not known which non-goal states are better than others. Strategies that know whether one non-goal state is better than another are referred to as \textbf{informed search} or \textbf{heuristic search} strategies.
+\end{definition}
+
+There are five major types of uninformed search strategies:
+\begin{itemize}
+    \item Breadth-first search (BFS)
+    \item Uniform-cost search (UCS)
+    \item Depth-first search (DFS)
+    \item Depth-limited search (DLS)
+    \item Iterative deepening search (IDS)
+\end{itemize}
+All of these uninformed search strategies are distinguished by the \emph{order} in which nodes are expanded.
+
+\subsection{Breadth-first search (BFS)}
+\label{sub_sec:breadth_first_search}
+
+Breadth-first search operates level-by-level, expanding all nodes at a given level before expanding any nodes at the next level. On a given level, nodes are expanded from left to right by convention.
+
+\begin{definition}
+    Breadth-first search is implemented using a \textbf{first in, first out (FIFO) queue}. The FIFO queue is a data structure that supports two operations: \textbf{enqueue} and \textbf{dequeue}. The enqueue operation adds an element to the end of the queue, and the dequeue operation removes an element from the front of the queue.
+\end{definition}
+
+\begin{definition}
+    If a solution exists, breadth-first search will find it in finite time, provided that the branching factor is finite and the depth of the solution is finite; this means that breadth-first search is \textbf{complete}. Breadth-first search is not always \textbf{optimal}, however, as the solution found may not have the minimum cost. It is optimal when all edges have the same cost, no cost, or when the cost is a non-decreasing function of the depth of the node.
+\end{definition}
+
+\begin{definition}
+    The \textbf{time complexity} of an algorithm is the number of steps required to solve a problem of size $n$, where $n$ is the size of the input; in the worst-case of breadth-first search, the goal node would be the very last node explored (ie, every vertex and edge is explored; $O(|V| + |E|)$). The \textbf{space complexity} of an algorithm is the maximum amount of memory required to solve a problem of size $n$; in the worst-case of breadth-first search, the goal node is discovered after all verticies are explored \& stored in memory $O(|V|)$.
+\end{definition}
+
+\begin{definition}
+    Complexity is expressed in terms of three quantities:
+    \begin{itemize}
+        \item $b$ is the \textbf{branching factor}, or the maximum number of children, or `successors', of any node.
+        \item $d$ is the \textbf{depth} of the shallowest (ie, closest to the root) goal node.
+        \item $m$ is the \textbf{maximum length} of any path in the state space.
+    \end{itemize}
+\end{definition}
+
+The time and space complexity of breadth-first search is exponential, $O(b^{d})$, where $b$ is the branching factor and $d$ is the depth of the shallowest goal node. This is because the number of nodes expands exponentially with the depth of the tree.
+
+\subsection{Uniform-cost search (UCS)}
+\label{sub_sec:uniform_cost_search}
+
+Uniform-cost search expands the node $n$ with the \emph{lowest} path cost $g(n)$ instead of expanding the shallowest node, where $g(n)$ returns the cost of the path from the starting node, $s$, to the current node, $n$. This is also referred to as `Dijkstra's algorithm'. This algorithm uses a priority queue to order nodes in the frontier list by path cost, with the lowest cost node at the front of the queue.
+
+% \subsection{Sub Section 1}
+% \label{sub_sec:sub_section_1}
+
+% \begin{theorem}
+% This is a theorem.
+% \end{theorem}
+% \begin{proof}
+% This is a proof.
+% \end{proof}
+% \begin{example}
+% This is an example.
+% \end{example}
+% \begin{explanation}
+% This is an explanation.
+% \end{explanation}
+% \begin{claim}
+% This is a claim.
+% \end{claim}
+% \begin{corollary}
+% This is a corollary.
+% \end{corollary}
+% \begin{prop}
+% This is a proposition.
+% \end{prop}
+% \begin{lemma}
+% This is a lemma.
+% \end{lemma}
+% \begin{question}
+% This is a question.
+% \end{question}
+% \begin{solution}
+% This is a solution.
+% \end{solution}
+% \begin{exercise}
+% This is an exercise.
+% \end{exercise}
+% \begin{definition}[Definition]
+% This is a definition.
+% \end{definition}
+% \begin{note}
+% This is a note.
+% \end{note}
+
+% subsection sub_section_1 (end)
+
+\newpage
