@@ -1,0 +1,81 @@
+\lesson{Wed, 6 September 2023, 11:40am -- 1:00pm}{Week 2, Wednesday}
+
+\subsection{Uniform-cost search (UCS) -- continued}
+\label{sub_sec:uniform_cost_search_continued}
+
+UCS is optimal and complete, but its time and space complexity remain exponential in the worst case ($O(b^{1 + \lfloor \frac{C^{*}}{\epsilon} \rfloor}))$, where all edge costs are at least $\epsilon$, $\epsilon > 0$, and $C^{*}$ is the cost of the optimal solution).
+
+\subsection{Depth-first search (DFS)}
+\label{sub_sec:depth_first_search}
+
+Depth-first search expands the \emph{deepest} node first, removing elements from memory as it proceeds.
+
+\begin{definition}
+    Depth-first search performs \textbf{chronological backtracking}; when a search hits a dead end, it backs up to the level above.
+\end{definition}
+
+\begin{definition}
+    DFS is not complete without a \textbf{depth bound}, $D$.
+\end{definition}
+
+DFS is not optimal or complete. It has an exponential time complexity of $O(b^{m})$ and a linear space complexity of $O(bm)$, where $M$ is the maximum length of any path in the state space, and $b$ is the branching factor.
+
+\subsection{Iterative deepening search (IDS)}
+\label{sub_sec:iterative_deepening_search}
+
+IDS is a combination of BFS and DFS.\@ It performs a DFS with a depth bound, $D$ (typically starting at $1$), that increases with each iteration. It is complete (when there are no loops) and optimal, and has a time complexity of $O(b^{d})$ and a space complexity of $O(bd)$, where $d$ is the depth of the shallowest goal node.
+
+\begin{definition}
+    Iterative deepening search is an example of an \textbf{`anytime' algoirhtm}; it can return a valid solution to a problem even if it is interrurpted before concluding. It is expected to find better solutions as it continues running.
+\end{definition}
+
+Generally, IDS is the preferred uninformed search algorithm when the search space is large and the depth of the solution is not known.
+
+
+
+% \subsection{Sub Section 1}
+% \label{sub_sec:sub_section_1}
+
+% \begin{theorem}
+% This is a theorem.
+% \end{theorem}
+% \begin{proof}
+% This is a proof.
+% \end{proof}
+% \begin{example}
+% This is an example.
+% \end{example}
+% \begin{explanation}
+% This is an explanation.
+% \end{explanation}
+% \begin{claim}
+% This is a claim.
+% \end{claim}
+% \begin{corollary}
+% This is a corollary.
+% \end{corollary}
+% \begin{prop}
+% This is a proposition.
+% \end{prop}
+% \begin{lemma}
+% This is a lemma.
+% \end{lemma}
+% \begin{question}
+% This is a question.
+% \end{question}
+% \begin{solution}
+% This is a solution.
+% \end{solution}
+% \begin{exercise}
+% This is an exercise.
+% \end{exercise}
+% \begin{definition}[Definition]
+% This is a definition.
+% \end{definition}
+% \begin{note}
+% This is a note.
+% \end{note}
+
+% subsection sub_section_1 (end)
+
+\newpage
