@@ -1,0 +1,66 @@
+\lesson{Fri, 8 September 2023, 11:40am -- 1:00pm}{Week 2, Friday}
+
+\subsection{Informed Search}
+\label{sub_sec:informed_search}
+
+\begin{definition}
+    \textbf{Informed search algorithms} use problem-specific knowledge (ie, \textbf{domain knowledge}) to find solutions more efficiently than uninformed search algorithms. They use a \textbf{heuristic function} to estimate the cost of the cheapest path from a given node to a goal node. The heuristic function is denoted $h(n)$, where $n$ is a node in the search tree. $h(n) \ge 0$ for all $n$, while an $h(n)$ close to $0$ means that $n$ is close to a goal node, while an $h(n)$ that is very large means that $n$ is far from a goal node.
+\end{definition}
+
+\subsection{$A^{*}$ Search}
+\label{sub_sec:a_star_search}
+
+$A^{*}$ search is an informed search algorithm that uses a heuristic function to estimate the cost of the cheapest path from a given node to a goal node. It uses a \textbf{cost function}, $f(n)$, to estimate the cost of the cheapest path from the start node to a goal node through $n$. $f(n)$ is defined as $f(n) = g(n) + h(n)$. $g(n)$ is the cost of the path from the start node to $n$, and $h(n)$ is the heuristic function. $A^{*}$ search expands the nodes on the frontier in order of increasing $f(n)$ values (ie, the node with the lowest $f(n)$ is expanded first).
+
+\begin{definition}
+    A heuristic, $h$, is \textbf{admissible} if it never overestimates the cost of reaching the goal, ie, $h(n) \le h^{*}(n)$, where $h^{*}(n)$ is the true cost of reaching the goal from $n$. An admissible heuristic is \textbf{optimistic}. The straight-line distance ($h_{\text{SLD}}$) between two points is an admissible heuristic for the problem of finding the shortest path between them. If the heuristic is admissible, then $A^{*}$ search is optimal.
+\end{definition}
+
+The time \& space complexity of $A^{*}$ search is polynomial when $h$ satisfies $| h(n) - h^{*}(n) | = O(\log h^{*}(n))$. When $h(n) = 0$, this condition is \emph{not} satisfied, and, in effect, $A^{*}$ search becomes UCS\@.
+
+% \subsection{Sub Section 1}
+% \label{sub_sec:sub_section_1}
+
+% \begin{theorem}
+% This is a theorem.
+% \end{theorem}
+% \begin{proof}
+% This is a proof.
+% \end{proof}
+% \begin{example}
+% This is an example.
+% \end{example}
+% \begin{explanation}
+% This is an explanation.
+% \end{explanation}
+% \begin{claim}
+% This is a claim.
+% \end{claim}
+% \begin{corollary}
+% This is a corollary.
+% \end{corollary}
+% \begin{prop}
+% This is a proposition.
+% \end{prop}
+% \begin{lemma}
+% This is a lemma.
+% \end{lemma}
+% \begin{question}
+% This is a question.
+% \end{question}
+% \begin{solution}
+% This is a solution.
+% \end{solution}
+% \begin{exercise}
+% This is an exercise.
+% \end{exercise}
+% \begin{definition}[Definition]
+% This is a definition.
+% \end{definition}
+% \begin{note}
+% This is a note.
+% \end{note}
+
+% subsection sub_section_1 (end)
+
+\newpage
