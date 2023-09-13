@@ -1,0 +1,88 @@
+\lesson{Wed, 13 September 2023, 11:40am -- 1:00pm}{Week 3, Wednesday}
+
+\begin{definition}
+    \textbf{Multiagent environments} are environments in which multiple agents share the same environment.
+\end{definition}
+
+Contingency plans are necessary to account for the unpredictability of other agents.
+
+\begin{definition}
+    Each agent has its own \textbf{utility function} that maps states to real numbers.
+\end{definition}
+
+\begin{definition}
+    A \textbf{zero-sum game} is a game in which the sum of the utilities of all agents is zero. A \textbf{game} is a decision-making problem, which is a multiagent environment in which the agents' goals are in conflict. A \textbf{competitive game} is a game in which the agents' utility functions are maximised by different states.
+\end{definition}
+
+\begin{definition}
+    A \textbf{game} is defined by:
+
+    \begin{itemize}
+        \item $S_{0}$, the initial state.
+        \item $\text{PLAYER}(s)$, which returns the player whose turn it is in state $s$.
+        \item $\text{ACTIONS}(s)$, which returns the set of legal moves in state $s$.
+        \item $\text{RESULT}(s, a)$, which returns the state resulting from playing action $a$ in state $s$.
+        \item $\text{TERMINAL-TEST}(s)$, which returns if $s$ is in its terminal state.
+        \item $\text{UTILITY}(s, p)$ (referred to as the objective function or payoff function), which returns the final numeric value for a game that ends in terminal state $s$ for a player $p$.
+    \end{itemize}
+\end{definition}
+
+\subsection{$\alpha$-$\beta$ pruning}
+\label{sub_sec:alpha_beta_pruning}
+
+\begin{definition}
+    \textbf{Minimax} is a decision rule for minimizing the possible loss for a worst case (maximum loss) scenario. It is a recursive algorithm for choosing the next move in an $n$-player game, usually a two-player game. A value is associated with each position or state of the game. This value is computed by means of a \textbf{position evaluation function} and it indicates how good it would be for a player to reach that position. The player then makes the move that maximizes the minimum value of the position resulting from the opponent's possible following moves. If it is $A$'s turn to move, $A$ gives a value to each of their legal moves. $A$ will choose the move with the maximum value of the minimum values resulting from their opponent's possible following moves. If it is $B$'s turn to move, $B$ gives a value to each of their legal moves. $B$ will choose the move with the minimum value of the maximum values resulting from their opponent's possible following moves.
+\end{definition}
+
+Searching a complete tree takes $O(b^{m})$ time, where $b$ is the branching factor and $m$ is the maximum depth of the tree. This is too slow for most games. We can prune the tree to reduce the number of nodes that need to be explored.
+
+\begin{definition}
+    \textbf{Pruning} is the process of removing parts of a tree that are not relevant to the computation.\ \textbf{$\alpha$-$\beta$ pruning} is a search algorithm that seeks to decrease the number of nodes that are evaluated by the minimax algorithm in its search tree. It stops evaluating a move when at least one possibility has been found that proves the move to be worse than a previously examined move. Such moves need not be evaluated further. When applied to a standard minimax tree, it returns the same move as minimax would, but prunes away branches that cannot possibly influence the final decision.
+\end{definition}
+
+% \subsection{Sub Section 1}
+% \label{sub_sec:sub_section_1}
+
+% \begin{theorem}
+% This is a theorem.
+% \end{theorem}
+% \begin{proof}
+% This is a proof.
+% \end{proof}
+% \begin{example}
+% This is an example.
+% \end{example}
+% \begin{explanation}
+% This is an explanation.
+% \end{explanation}
+% \begin{claim}
+% This is a claim.
+% \end{claim}
+% \begin{corollary}
+% This is a corollary.
+% \end{corollary}
+% \begin{prop}
+% This is a proposition.
+% \end{prop}
+% \begin{lemma}
+% This is a lemma.
+% \end{lemma}
+% \begin{question}
+% This is a question.
+% \end{question}
+% \begin{solution}
+% This is a solution.
+% \end{solution}
+% \begin{exercise}
+% This is an exercise.
+% \end{exercise}
+% \begin{definition}[Definition]
+% This is a definition.
+% \end{definition}
+% \begin{note}
+% This is a note.
+% \end{note}
+
+% subsection sub_section_1 (end)
+
+\newpage
