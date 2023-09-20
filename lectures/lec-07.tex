@@ -1,0 +1,79 @@
+\lesson{Wed, 20 September 2023, 11:40am -- 1:00pm}{Week 4, Wednesday}
+
+\subsection{Gradient Descent}
+\label{sub_sec:gradient_descent}
+
+In many real-world scenarios, states are continuous variables.
+
+\begin{example}
+    Suppose you have several cities with nearby airports, and you want to build three new airports, while minimising the distance from each city to its nearest airport. You could model this problem as a continuous optimization problem, where $C_{i}$ denote the cities that have the airport $i$ as their nearest airport. If you define $(x_{i}, y_{i})$ as the coordinates of the airport $i$, and $(x_{c}, y_{c})$ as the coordinates of the city $c$. The aim is to minimise the function $f$, $f(x_{1}, y_{1}, x_{1}, y_{2}, x_{3}, y_{3}) = \sum_{i=1}^{3} \sum_{c \in C_{i}} (x_{i} - x_{c})^{2} + (y_{i} - y_{c})^{2}$. There is no need to place a $\sqrt{}$ in the function around the distance formula, since the square root is a monotonic function, and the minimum of the function $f$ is the same as the minimum of $\sqrt{f}$.
+\end{example}
+
+\begin{solution}
+    A common approach to solving optimisation problems involves calculating the gradient; $\nabla f = (\frac{\partial f}{\partial x_{1}}, \frac{\partial f}{\partial y_{1}}, \frac{\partial f}{\partial x_{2}}, \frac{\partial f}{\partial y_{2}}, \frac{\partial f}{\partial x_{3}}, \frac{\partial f}{\partial y_{3}})$. We can apply the update rule $x_{i} \leftarrow x_{i} - \alpha \frac{\partial f}{\partial x_{i}}$ (ie, $x \leftarrow x - \alpha \nabla f$) to each of the coordinates of the airports, where $\alpha$ is the learning rate. We can then repeat this process until the gradient is close to zero. In this scenario, $\frac{\partial f}{x_{i}} = 2 \sum_{c \in C_{i}} (x_{i} - x_{c})$. This applies to $y_{i}$ as well. In order to choose $\alpha$, we can use Newton's method.
+\end{solution}
+
+\begin{definition}[Newton's method]
+    In 1669, Sir Isaac Newton discovered a method for finding the roots of a function $g$ that consists of iteratively applying the update rule $x \leftarrow x - \frac{g(x)}{g'(x)}$ until $g(x)$ is close to zero. This method is called \textbf{Newton's method}. In optimisation, the goal is to find a point where $\nabla g$ is $0$; the update rule can be rewritten as $x \leftarrow x - \frac{\nabla g(x)}{\nabla^{2} g(x)}$, where $\nabla^{2} g(x)$ is the Hessian matrix of $g$ at $x$ as $g''$ is multivariate. Therefore, the update rule becomes $x \leftarrow x - H_{g}^{-1}(x) \nabla g(x)$.
+\end{definition}
+
+\begin{definition}[Gradient descent]
+    \textbf{Gradient descent} is an algorithm for finding the minimum of a function $f$ that takes a real number $x$ and returns a real number $f(x)$. The gradient descent algorithm is as follows:
+    \begin{enumerate}
+        \item Pick a random value for $x$.
+        \item Compute the gradient of $f(x)$ at $x$.
+        \item Update $x$ by taking a small step in the direction of the negative gradient.
+        \item Repeat steps $2$ and $3$ until $x$ converges.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Hessian matrix]
+    A \textbf{Hessian matrix} of second derivatives is a matrix whose elements are the second partial derivatives of a function; $H_{f}(x)$ would have its elements, $H_{ij}$, given by $\frac{\partial^{2} f}{\partial x_{i} \partial x_{j}}$. The Hessian matrix is used to determine whether a critical point of a function is a local maximum, local minimum, or saddle point.
+\end{definition}
+
+% \subsection{Sub Section 1}
+% \label{sub_sec:sub_section_1}
+
+% \begin{theorem}
+% This is a theorem.
+% \end{theorem}
+% \begin{proof}
+% This is a proof.
+% \end{proof}
+% \begin{example}
+% This is an example.
+% \end{example}
+% \begin{explanation}
+% This is an explanation.
+% \end{explanation}
+% \begin{claim}
+% This is a claim.
+% \end{claim}
+% \begin{corollary}
+% This is a corollary.
+% \end{corollary}
+% \begin{prop}
+% This is a proposition.
+% \end{prop}
+% \begin{lemma}
+% This is a lemma.
+% \end{lemma}
+% \begin{question}
+% This is a question.
+% \end{question}
+% \begin{solution}
+% This is a solution.
+% \end{solution}
+% \begin{exercise}
+% This is an exercise.
+% \end{exercise}
+% \begin{definition}[Definition]
+% This is a definition.
+% \end{definition}
+% \begin{note}
+% This is a note.
+% \end{note}
+
+% subsection sub_section_1 (end)
+
+\newpage
