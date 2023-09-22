@@ -31,6 +31,18 @@ In many real-world scenarios, states are continuous variables.
     A \textbf{Hessian matrix} of second derivatives is a matrix whose elements are the second partial derivatives of a function; $H_{f}(x)$ would have its elements, $H_{ij}$, given by $\frac{\partial^{2} f}{\partial x_{i} \partial x_{j}}$. The Hessian matrix is used to determine whether a critical point of a function is a local maximum, local minimum, or saddle point.
 \end{definition}
 
+In the prior airport example of gradient descent, the Hessian matrix, $H_{f}^{-1}$, would be:
+\begin{align*}
+    \begin{pmatrix}
+        \frac{1}{2|C_{1}|} & 0 & 0 & 0 & 0 & 0\\
+        0 & \frac{1}{2|C_{2}|} & 0 & 0 & 0 & 0\\
+        0 & 0 & \frac{1}{2|C_{3}|} & 0 & 0 & 0\\
+        0 & 0 & 0 & \frac{1}{2|C_{4}|} & 0 & 0\\
+        0 & 0 & 0 & 0 & \frac{1}{2|C_{5}|} & 0\\
+        0 & 0 & 0 & 0 & 0 & \frac{1}{2|C_{6}|}\\
+    \end{pmatrix}_{6 \times 6}
+\end{align*}
+
 % \subsection{Sub Section 1}
 % \label{sub_sec:sub_section_1}
 
