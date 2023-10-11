@@ -1,0 +1,133 @@
+\lesson{Fri, 6 October 2023, 11:40am -- 1:00pm}{Week 6, Friday}
+
+\subsection{Constraint Satisfaction Problems (CSPs)}
+\label{sub:constraint_satisfaction_problems_csps}
+
+A constraint satisfaction problem consists of three components:\\
+\begin{itemize}
+    \item A set of variables $X_1, X_2, \ldots, X_n$.
+    \item A set of domains $D_1, D_2, \ldots, D_n$, where $D_{i}$ is the domain of the variable $X_{i}$---that is, $X_{i} \in D_{i}$.
+    \item A set of constraints that specify allowable combinations of values.
+\end{itemize}
+
+\begin{definition}
+    To solve a CSP, the state space must be defined:\\
+    \begin{itemize}
+        \item \textbf{State}: assignment of values to some or all variables.
+        \item \textbf{Consistent assignment}: assignment that does not violate any constraints.
+        \item \textbf{Partial assignment}: assignment that does not assign values to all variables.
+        \item \textbf{Complete assignment}: assignment that assigns values to all variables.
+        \item \textbf{Solution}: an assignment which is consistent \& complete.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    The \textbf{four colour theorem} (Appel and Haken, 1976) states that any map can be coloured using only four colours, so that no two adjacent regions have the same colour.
+\end{definition}
+
+\begin{example}
+    If we wished to colour a map of Australia, we could represent the problem as a CSP with the following variables and domains:\\
+    \begin{itemize}
+        \item $X = \{ \text{WA}, \text{NT}, \text{Q}, \text{NSW}, \text{NSW}, \text{V}, \text{SA}, \text{T} \}$
+        \item $D_{i} = \{ \text{Red}, \text{Green}, \text{Blue} \}$
+        \item $C = \{ \text{SA} \neq \text{WA}, \text{SA} \neq \text{NT}, \text{SA} \neq \text{Q}, \text{SA} \neq \text{NSW}, \text{SA} \neq \text{V}, \text{WA} \neq \text{NT}, \text{NT} \neq \text{Q}, \text{Q} \neq \text{NSW}, \text{NSW} \neq \text{V} \}$
+    \end{itemize}
+    CSPs can be more efficient than state space searchers, as constraints can eliminate large portions of the search space. In this case, setting $\text{SA} = \{ \text{Blue} \}$ reduces the number of assignments from $3^{5}$ to $2^{5}$---from $243$ to $32$.
+\end{example}
+\pagebreak
+\begin{example}
+    If we wished to schedule the steps of a car assembly line, we could represent the problem as a CSP. The assembly line performs the following steps:\\
+    \begin{enumerate}
+        \item Installing the axles, $\text{Axle}_{F}$ \& $\text{Axle}_{B}$, taking $10$ minutes each.
+        \item Affix the wheels, $\text{Wheel}_{RF}$; $\text{Wheel}_{LF}$; $\text{Wheel}_{RB}$; and $\text{Wheel}_{LB}$, taking $1$ minute each.
+        \item Tighten the nuts for each wheel, $\text{Nut}_{RF}$; $\text{Nut}_{LF}$; $\text{Nut}_{RB}$; and $\text{Nut}_{LB}$, taking $2$ minutes each.
+        \item Affix the hubcaps, $\text{Cap}_{RF}$; $\text{Cap}_{LF}$; $\text{Cap}_{RB}$; and $\text{Cap}_{LB}$, taking $1$ minute each.
+        \item Inspect the final assembly, $\text{Inspect}$, which takes $3$ minutes.
+    \end{enumerate}
+    The problem is finding when each task should be started in the time interval of $[0, 30] \text{ minutes}$. We can represent the problem as a CSP with the following variables and domains:\\
+    \begin{align*}
+        X &= \{ \text{Axle}_{F}, \text{Axle}_{B}, \text{Wheel}_{RF}, \text{Wheel}_{LF}, \text{Wheel}_{RB}, \text{Wheel}_{LB}, \\
+        &\text{Nut}_{RF}, \text{Nut}_{LF}, \text{Nut}_{RB}, \text{Nut}_{LB}, \\
+        &\text{Cap}_{RF}, \text{Cap}_{LF}, \text{Cap}_{RB}, \text{Cap}_{LB}, \\
+        &\text{Inspect} \}\\
+        D_{i} &= [0, 27]
+    \end{align*}
+
+    We have the following precedence constraints:\\
+    \begin{align*}
+        \text{Axle}_{F} + 10 \le \text{Wheel}_{RF}; & \text{Axle}_{F} + 10 \le \text{Wheel}_{LF};\\
+        \text{Axle}_{B} + 10 \le \text{Wheel}_{RB}; & \text{Axle}_{B} + 10 \le \text{Wheel}_{LB};\\
+        \text{Wheel}_{RF} + 1 \le \text{Nut}_{RF}; & \text{Nut}_{RF} + 2 \le \text{Cap}_{RF};\\
+        \text{Wheel}_{LF} + 1 \le \text{Nut}_{LF}; & \text{Nut}_{LF} + 2 \le \text{Cap}_{LF};\\
+        \text{Wheel}_{RB} + 1 \le \text{Nut}_{RB}; & \text{Nut}_{RB} + 2 \le \text{Cap}_{RB};\\
+        \text{Wheel}_{LB} + 1 \le \text{Nut}_{LB}; & \text{Nut}_{LB} + 2 \le \text{Cap}_{LB}.
+    \end{align*}
+    Additionally, we have the constraint that $X_{i} + T_{i} \le \text{Inspect}$ for each $X_{i}$, where $T_{i}$ is the duration of task $X_{i}$. Therefore, the solution to this problem would be an assignment of each variable to a value in $D_{i}$ such that every constraint is satisfied.
+\end{example}
+
+Considering the above example, if we have four workers to install the wheels, but only one pair of workers can install an axle at a time (ie, $\text{Axle}_{F}$ and $\text{Axle}_{B}$ cannot coincide), then we have a \textbf{disjunctive constraint}, $(\text{Axle}_{F} + 10 \le \text{Axle}_{B}) \lor (\text{Axle}_{B} + 10 \le \text{Axle}_{F})$.
+
+\begin{definition}
+    A \textbf{linear program} is an optimisation problem where the objective function and constraints are all linear.
+\end{definition}
+
+\begin{example}
+    Given the previous example, we could have a linear program that aimed to minimise $\text{Inspect}$ such that $\forall X_{i} \in X - \{ \text{Inspect} \} : X_{i} + T_{i} \le \text{Inspect}$;
+    \begin{align*}
+        \text{Axle}_{F} + 10 \le \text{Wheel}_{RF}; & \text{Axle}_{F} + 10 \le \text{Wheel}_{LF};\\
+        \text{Axle}_{B} + 10 \le \text{Wheel}_{RB}; & \text{Axle}_{B} + 10 \le \text{Wheel}_{LB};\\
+        \text{Wheel}_{RF} + 1 \le \text{Nut}_{RF}; & \text{Nut}_{RF} + 2 \le \text{Cap}_{RF};\\
+        \text{Wheel}_{LF} + 1 \le \text{Nut}_{LF}; & \text{Nut}_{LF} + 2 \le \text{Cap}_{LF};\\
+        \text{Wheel}_{RB} + 1 \le \text{Nut}_{RB}; & \text{Nut}_{RB} + 2 \le \text{Cap}_{RB};\\
+        \text{Wheel}_{LB} + 1 \le \text{Nut}_{LB}; & \text{Nut}_{LB} + 2 \le \text{Cap}_{LB}.
+    \end{align*}
+\end{example}
+
+While linear programming is appropriate for optimisation problems, CSPs are not necessarily optimisation problems; we're only seeking some solution that satisfies all of the given constraints. For example, the four colour theorem is not an optimisation problem, as there is no objective function to minimise or maximise. CSPs can have non-linear constraints, such as complex constraints on discrete variables (such as in the eight queens puzzle), or constraints on continuous variables (such as in the travelling salesman problem), while linear programs must only have linear constraints.
+
+% \subsection{Sub Section 1}
+% \label{sub_sec:sub_section_1}
+
+% \begin{theorem}
+% This is a theorem.
+% \end{theorem}
+% \begin{proof}
+% This is a proof.
+% \end{proof}
+% \begin{example}
+% This is an example.
+% \end{example}
+% \begin{explanation}
+% This is an explanation.
+% \end{explanation}
+% \begin{claim}
+% This is a claim.
+% \end{claim}
+% \begin{corollary}
+% This is a corollary.
+% \end{corollary}
+% \begin{prop}
+% This is a proposition.
+% \end{prop}
+% \begin{lemma}
+% This is a lemma.
+% \end{lemma}
+% \begin{question}
+% This is a question.
+% \end{question}
+% \begin{solution}
+% This is a solution.
+% \end{solution}
+% \begin{exercise}
+% This is an exercise.
+% \end{exercise}
+% \begin{definition}[Definition]
+% This is a definition.
+% \end{definition}
+% \begin{note}
+% This is a note.
+% \end{note}
+
+% subsection sub_section_1 (end)
+
+\newpage
