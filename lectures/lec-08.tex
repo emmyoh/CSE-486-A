@@ -55,12 +55,12 @@ A constraint satisfaction problem consists of three components:\\
 
     We have the following precedence constraints:\\
     \begin{align*}
-        \text{Axle}_{F} + 10 \le \text{Wheel}_{RF}; & \text{Axle}_{F} + 10 \le \text{Wheel}_{LF};\\
-        \text{Axle}_{B} + 10 \le \text{Wheel}_{RB}; & \text{Axle}_{B} + 10 \le \text{Wheel}_{LB};\\
-        \text{Wheel}_{RF} + 1 \le \text{Nut}_{RF}; & \text{Nut}_{RF} + 2 \le \text{Cap}_{RF};\\
-        \text{Wheel}_{LF} + 1 \le \text{Nut}_{LF}; & \text{Nut}_{LF} + 2 \le \text{Cap}_{LF};\\
-        \text{Wheel}_{RB} + 1 \le \text{Nut}_{RB}; & \text{Nut}_{RB} + 2 \le \text{Cap}_{RB};\\
-        \text{Wheel}_{LB} + 1 \le \text{Nut}_{LB}; & \text{Nut}_{LB} + 2 \le \text{Cap}_{LB}.
+        \text{Axle}_{F} + 10 \le \text{Wheel}_{RF}; &\qquad \text{Axle}_{F} + 10 \le \text{Wheel}_{LF};\\
+        \text{Axle}_{B} + 10 \le \text{Wheel}_{RB}; &\qquad \text{Axle}_{B} + 10 \le \text{Wheel}_{LB};\\
+        \text{Wheel}_{RF} + 1 \le \text{Nut}_{RF}; &\qquad \text{Nut}_{RF} + 2 \le \text{Cap}_{RF};\\
+        \text{Wheel}_{LF} + 1 \le \text{Nut}_{LF}; &\qquad \text{Nut}_{LF} + 2 \le \text{Cap}_{LF};\\
+        \text{Wheel}_{RB} + 1 \le \text{Nut}_{RB}; &\qquad \text{Nut}_{RB} + 2 \le \text{Cap}_{RB};\\
+        \text{Wheel}_{LB} + 1 \le \text{Nut}_{LB}; &\qquad \text{Nut}_{LB} + 2 \le \text{Cap}_{LB}.
     \end{align*}
     Additionally, we have the constraint that $X_{i} + T_{i} \le \text{Inspect}$ for each $X_{i}$, where $T_{i}$ is the duration of task $X_{i}$. Therefore, the solution to this problem would be an assignment of each variable to a value in $D_{i}$ such that every constraint is satisfied.
 \end{example}
@@ -74,12 +74,12 @@ Considering the above example, if we have four workers to install the wheels, bu
 \begin{example}
     Given the previous example, we could have a linear program that aimed to minimise $\text{Inspect}$ such that $\forall X_{i} \in X - \{ \text{Inspect} \} : X_{i} + T_{i} \le \text{Inspect}$;
     \begin{align*}
-        \text{Axle}_{F} + 10 \le \text{Wheel}_{RF}; & \text{Axle}_{F} + 10 \le \text{Wheel}_{LF};\\
-        \text{Axle}_{B} + 10 \le \text{Wheel}_{RB}; & \text{Axle}_{B} + 10 \le \text{Wheel}_{LB};\\
-        \text{Wheel}_{RF} + 1 \le \text{Nut}_{RF}; & \text{Nut}_{RF} + 2 \le \text{Cap}_{RF};\\
-        \text{Wheel}_{LF} + 1 \le \text{Nut}_{LF}; & \text{Nut}_{LF} + 2 \le \text{Cap}_{LF};\\
-        \text{Wheel}_{RB} + 1 \le \text{Nut}_{RB}; & \text{Nut}_{RB} + 2 \le \text{Cap}_{RB};\\
-        \text{Wheel}_{LB} + 1 \le \text{Nut}_{LB}; & \text{Nut}_{LB} + 2 \le \text{Cap}_{LB}.
+        \text{Axle}_{F} + 10 \le \text{Wheel}_{RF}; &\qquad \text{Axle}_{F} + 10 \le \text{Wheel}_{LF};\\
+        \text{Axle}_{B} + 10 \le \text{Wheel}_{RB}; &\qquad \text{Axle}_{B} + 10 \le \text{Wheel}_{LB};\\
+        \text{Wheel}_{RF} + 1 \le \text{Nut}_{RF}; &\qquad \text{Nut}_{RF} + 2 \le \text{Cap}_{RF};\\
+        \text{Wheel}_{LF} + 1 \le \text{Nut}_{LF}; &\qquad \text{Nut}_{LF} + 2 \le \text{Cap}_{LF};\\
+        \text{Wheel}_{RB} + 1 \le \text{Nut}_{RB}; &\qquad \text{Nut}_{RB} + 2 \le \text{Cap}_{RB};\\
+        \text{Wheel}_{LB} + 1 \le \text{Nut}_{LB}; &\qquad \text{Nut}_{LB} + 2 \le \text{Cap}_{LB}.
     \end{align*}
 \end{example}
 

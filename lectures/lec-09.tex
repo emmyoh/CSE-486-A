@@ -1,0 +1,74 @@
+\lesson{Wed, 11 October 2023, 11:40am -- 1:00pm}{Week 7, Wednesday}
+
+\subsection{Min-conflicts algorithm}
+\label{sub:min_conflicts_algorithm}
+
+CSPs can often be solved effectively with local search algorithms that use a complete state formulation---that is, the initial state assigns values to every variable, and then the search updates the values one variable at a time. With the eight queens puzzle, for example, one may begin by placing the eight queens in a random configuration, before then proceeding to move one randomly selected conflicting queen at a time until the puzzle is solved. To choose these new values, one may use the \textbf{min-conflicts heuristic}---when picking a new value for a given variable, one selects the value that would lead to a minimum number of conflicts with the other variables (and if there are multiple possible minimums, randomly select one).
+
+\begin{algorithm}[H]
+\caption{Min-conflicts algorithm}
+\begin{algorithmic}[1]
+\Procedure{min-conflicts}{$csp$, $max\_steps$}
+\State $current \gets$ an initial complete assignment for $csp$
+\For{$i = 1$ to $max\_steps$}
+\If{$current$ is a solution for $csp$}
+\State \textbf{return} $current$
+\EndIf
+    \State $var \gets$ a randomly chosen, conflicted variable from $csp.\text{VARIABLES}$
+    \State $value \gets$ the value $v$ for $var$ that minimizes $\text{CONFLICTS}(var, v, current, csp)$
+    \State $current[var] \gets value$
+\EndFor
+\State \textbf{return} \textsc{failure}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+On the $n$-queens problem, the performance of min-conflicts appears roughly constant with respect to $n$. Another advantage of linear search is its ability to adapt to changes in the problem, such as when solving scheduling problems with online data.
+
+
+% \subsection{Sub Section 1}
+% \label{sub_sec:sub_section_1}
+
+% \begin{theorem}
+% This is a theorem.
+% \end{theorem}
+% \begin{proof}
+% This is a proof.
+% \end{proof}
+% \begin{example}
+% This is an example.
+% \end{example}
+% \begin{explanation}
+% This is an explanation.
+% \end{explanation}
+% \begin{claim}
+% This is a claim.
+% \end{claim}
+% \begin{corollary}
+% This is a corollary.
+% \end{corollary}
+% \begin{prop}
+% This is a proposition.
+% \end{prop}
+% \begin{lemma}
+% This is a lemma.
+% \end{lemma}
+% \begin{question}
+% This is a question.
+% \end{question}
+% \begin{solution}
+% This is a solution.
+% \end{solution}
+% \begin{exercise}
+% This is an exercise.
+% \end{exercise}
+% \begin{definition}[Definition]
+% This is a definition.
+% \end{definition}
+% \begin{note}
+% This is a note.
+% \end{note}
+
+% subsection sub_section_1 (end)
+
+\newpage
