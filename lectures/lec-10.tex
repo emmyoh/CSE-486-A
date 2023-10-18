@@ -1,0 +1,82 @@
+\lesson{Wed, 18 October 2023, 11:40am -- 1:00pm}{Week 8, Wednesday}
+
+\subsection{Probabilistic Reasoning}\label{sub_sec:probabilistic_reasoning}
+
+\begin{example}
+    If an automated taxi aims to deliver a passenger to the airport on-time, it must choose a plan of action. The airport is $10$ miles away, and the taxi has two choices: $A_{90}$, departing for the airport $90$ minutes before the flight departs, and $A_{180}$, departing for the airport $180$ minutes before the flight departs. Plan $A_{90}$ faces a greater risk of being late relative to plan $A_{180}$. Yet, plan $A_{180}$ is more costly, as it requires the passenger to wait at the airport for a longer period of time. To choose between the two plans, an objective function must be defined, where there is a high cost for missing the flight (eg, $-1000$), and a low cost for waiting for the flight (eg, $-1$ per minute). Then, to decide, the taxi should know what will occur during the trip. Both \emph{complexity} and \emph{ignorance} prevent us from doing this; it's simply not feasible to model the world in its entirety, and we don't know what will happen in the future. Thus, we must use \textbf{probabilistic reasoning} to make decisions.
+\end{example}
+
+There are two common interpretations of probabilities; the \emph{frequentist interpretation}, that a probability is inherent to the system being modeled, and the \emph{Bayesian interpretation}, that a probability is a measure of our uncertainty about the system being modeled. For example, with a coin toss where tossing a fair coin will lead to it being heads-up is $50\% = 0.5$, the frequentist interpretation is that the coin is inherently fair (where tossing the coin $n$ times will lead to the heads-up outcome $\frac{n}{2}$ times as $n \rightarrow \infty$), and the Bayesian interpretation is that we are $50\%$ uncertain about the outcome of the coin toss. The issue with the frequentist interpretation is that some probabilistic statements (such as the probabilities of events that have not yet occurred before) do not have frequentist interpretations.
+
+The \textbf{sample space} is the set of all possible outcomes; possible outcomes are mutually exclusive, and the sample spaces are exhaustive. A fully-specified probabilistic model associates a probability, $P(\omega)$, with each possible outcome, $\omega$, such that $\forall \omega \in \Omega : 0 \le P(\omega) \le 1 \land \sum_{\omega \in \Omega} P(\omega) = 1$. Generally, if $\phi$ is a proposition, $P(\phi) = \sum_{\omega \in \phi} P(\omega)$.
+
+Given a probability distribution, we can make \textbf{probabilistic inferences}.
+
+\begin{example}
+    Given the following probability distribution below, $P(\text{Cavity} \lor \text{Toothache}) = 0.108 + 0.012 + 0.072 + 0.008 + 0.016 + 0.064 = 0.28$, $P(\text{Cavity}) = 0.108 + 0.012 + 0.072 + 0.008 = 0.2$. Calculating these probabilities is called \textbf{summing out}, or \textbf{marginalisation}. Generally, $P(X) = \sum_{Y \in y} P(X \cap Y)$. In this example, $P(\text{Cavity}) = \sum_{Y \in \{ (\text{Catch}, \text{Toothache}) \}} P(X|Y)P(Y)$.\\
+
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        & \multicolumn{2}{c|}{$\text{Toothache}$} & \multicolumn{2}{c|}{$\neg\text{Toothache}$}\\
+        \hline
+        & $\text{Catch}$ & $\neg\text{Catch}$ & $\text{Catch}$ & $\neg\text{Catch}$\\
+        \hline
+        $\text{Cavity}$ & $0.108$ & $0.012$ & $0.072$ & $0.008$\\
+        \hline
+        $\neg\text{Cavity}$ & $0.016$ & $0.064$ & $0.144$ & $0.576$\\
+        \hline
+    \end{tabular}
+\end{example}
+
+A variant of marginalisation is \textbf{conditioning}; $P(X) = \sum_{Y \in y} P(X|Y)P(Y)$. Conditional probability can be expressed as $P(A | B)$---read as `the probability of $A$ given that $B$ has already occurred'---defined as $P(A | B) = \frac{P(A \cap B)}{P(B)}$. The $P(B | A)$ is $P(B | A) = \frac{P(A \cap B)}{P(A)}$.\ \textbf{Independence} refers to situations where $P(X|Y) = P(X) \lor P(Y|X) = P(Y) \lor P(X \land Y) = P(X)P(Y)$.
+
+\begin{definition}[Bayes' Rule]
+    \textbf{Bayes' Rule} is a theorem that follows from the definition of conditional probability. As $P(X \land Y) = P(X|Y)P(Y)$ and $P(X \land Y) = P(Y|X)P(X)$, it follows that $P(X | Y) = \frac{P(Y | X)P(X)}{P(Y)}$. It is useful for \textbf{inverting conditional probabilities}, where we know $P(A | B)$ and want to find $P(B | A)$. When updating an agent's belief when presented with new evidence, for example, it can calculate $P(\text{Hypothesis} | \text{Evidence}) = P(\text{Hypothesis}) \frac{P(\text{Evidence} | \text{Hypothesis})}{P(\text{Evidence})}$. $P(X)$ is the \textbf{prior probability}, $P(X|Y)$ is the \textbf{posterior probability}, $P(Y|X)$ is the \textbf{likelihood}, and $P(Y)$ is the \textbf{marginal probability}. As $P(Y) = \sum_{X_{i}} P(Y|X_{i}) P(X_{i})$, $P(X|Y) = \frac{P(Y|X)P(X)}{P(Y)} = \frac{P(Y|X)P(X)}{\sum_{X_{i}} P(Y|X_{i})P(X_{i})} = \alpha P(Y|X) P(X)$, where $\alpha$ is the \textbf{normalisation constant}. This can also be written as $P(X|Y) \propto P(Y|X)P(X)$.
+\end{definition}
+
+% \subsection{Sub Section 1}
+% \label{sub_sec:sub_section_1}
+
+% \begin{theorem}
+% This is a theorem.
+% \end{theorem}
+% \begin{proof}
+% This is a proof.
+% \end{proof}
+% \begin{example}
+% This is an example.
+% \end{example}
+% \begin{explanation}
+% This is an explanation.
+% \end{explanation}
+% \begin{claim}
+% This is a claim.
+% \end{claim}
+% \begin{corollary}
+% This is a corollary.
+% \end{corollary}
+% \begin{prop}
+% This is a proposition.
+% \end{prop}
+% \begin{lemma}
+% This is a lemma.
+% \end{lemma}
+% \begin{question}
+% This is a question.
+% \end{question}
+% \begin{solution}
+% This is a solution.
+% \end{solution}
+% \begin{exercise}
+% This is an exercise.
+% \end{exercise}
+% \begin{definition}[Definition]
+% This is a definition.
+% \end{definition}
+% \begin{note}
+% This is a note.
+% \end{note}
+
+% subsection sub_section_1 (end)
+
+\newpage
