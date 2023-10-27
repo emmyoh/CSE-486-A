@@ -1,0 +1,87 @@
+\lesson{Fri, 27 October 2023, 11:40am -- 1:00pm}{Week 9, Friday}
+
+\subsection{Bayesian Networks}\label{sub:bayesian_networks}
+
+\begin{example}
+    A patient experiencing shortness of breath (`dyspnoea') visits the doctor; the doctor knows there may be several causes, such as tuberculosis, bronchitis, or lung cancer. Whether or not the patient is a smoker, and what air conditions the patient has been exposed to are factors. An X-ray may be performed, which may indicate that the patient has lung cancer or tuberculosis. Assuming the patient is experiencing dyspnoea, doesn't smoke, and has been in clean air, but that the X-ray comes back positive, what is the probability that the patient has cancer?
+
+    We may use a probabilistic model to compute
+    \begin{gather*}
+        P(\text{Cancer} \mid \text{Dyspnoea}, \text{X-ray}_{\text{positive}}, \lnot \text{Smoker}, \text{Pollution}_{\text{low}})\\
+        \approx \frac{\text{Cases}(\text{Cancer}, \text{Dyspnoea}, \text{X-ray}_{\text{positive}}, \lnot \text{Smoker}, \text{Pollution}_{\text{low}})}{\text{Cases}(\text{Dyspnoea}, \text{X-ray}_{\text{positive}}, \lnot \text{Smoker}, \text{Pollution}_{\text{low}})}.
+    \end{gather*}
+    
+    Estimating this is difficult, due to the large number of parameters. Instead, simpler relations may be used to find marginal probabilities, which can be used to calculate the joint probability distribution.
+\end{example}
+
+\begin{table}[ht]
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Node name & Type & Values\\
+        \hline
+        Pollution & Binary & $\{ \text{low}, \text{high} \}$\\
+        \hline
+        Smoker & Boolean & $\{ T, F \}$\\
+        \hline
+        Cancer & Boolean & $\{ T, F \}$\\
+        \hline
+        Dyspnoea & Boolean & $\{ T, F \}$\\
+        \hline
+        X-ray & Binary & $\{ \text{positive}, \text{negative} \}$\\
+        \hline
+    \end{tabular}
+    \caption{The nodes in the Bayesian network for the previous example.}
+\end{table}
+
+\begin{definition}[Bayesian Network]
+    A \textbf{Bayesian network} is a type of directed acyclic graph where each node corresponds to a random variable; each node, $X_{i}$, has a conditional probability distribution $P(X_{i} \mid \text{Parents}(X_{i}))$. These nodes have marginal probabilities and are independent of the other nodes in the graph. The joint probability distribution of the network is $P(x_{1}, x_{2}, \ldots, x_{n}) = \overset{n}{\underset{i=1}{\prod}} P(x_{i} \mid \text{Parents}(X_{i}))$, where $x_{i}$ is the value of $X_{i}$, and $X_{i}$ is the $i$th node in the network.
+\end{definition}
+
+% The previous example may be solved using a Bayesian network, where $P(\text{Cancer} \mid \text{Dyspnoea}, \text{X-ray}_{\text{positive}}, \lnot \text{Smoker}, \text{Pollution}_{\text{low}}) = P(\text{Dyspnoea} \mid \text{Cancer}) \cdot P(\text{X-ray}_{\text{positive}} \mid \text{Cancer}) \cdot P(\lnot \text{Smoker}) \cdot P(\text{Pollution}_{\text{low}})$.
+
+% \subsection{Sub Section 1}
+% \label{sub_sec:sub_section_1}
+
+% \begin{theorem}
+% This is a theorem.
+% \end{theorem}
+% \begin{proof}
+% This is a proof.
+% \end{proof}
+% \begin{example}
+% This is an example.
+% \end{example}
+% \begin{explanation}
+% This is an explanation.
+% \end{explanation}
+% \begin{claim}
+% This is a claim.
+% \end{claim}
+% \begin{corollary}
+% This is a corollary.
+% \end{corollary}
+% \begin{prop}
+% This is a proposition.
+% \end{prop}
+% \begin{lemma}
+% This is a lemma.
+% \end{lemma}
+% \begin{question}
+% This is a question.
+% \end{question}
+% \begin{solution}
+% This is a solution.
+% \end{solution}
+% \begin{exercise}
+% This is an exercise.
+% \end{exercise}
+% \begin{definition}[Definition]
+% This is a definition.
+% \end{definition}
+% \begin{note}
+% This is a note.
+% \end{note}
+
+% subsection sub_section_1 (end)
+
+\newpage
