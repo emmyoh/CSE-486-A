@@ -37,7 +37,14 @@
     A \textbf{Bayesian network} is a type of directed acyclic graph where each node corresponds to a random variable; each node, $X_{i}$, has a conditional probability distribution $P(X_{i} \mid \text{Parents}(X_{i}))$. These nodes have marginal probabilities and are independent of the other nodes in the graph. The joint probability distribution of the network is $P(x_{1}, x_{2}, \ldots, x_{n}) = \overset{n}{\underset{i=1}{\prod}} P(x_{i} \mid \text{Parents}(X_{i}))$, where $x_{i}$ is the value of $X_{i}$, and $X_{i}$ is the $i$th node in the network.
 \end{definition}
 
-% The previous example may be solved using a Bayesian network, where $P(\text{Cancer} \mid \text{Dyspnoea}, \text{X-ray}_{\text{positive}}, \lnot \text{Smoker}, \text{Pollution}_{\text{low}}) = P(\text{Dyspnoea} \mid \text{Cancer}) \cdot P(\text{X-ray}_{\text{positive}} \mid \text{Cancer}) \cdot P(\lnot \text{Smoker}) \cdot P(\text{Pollution}_{\text{low}})$.
+The previous example may be solved using a Bayesian network, where,\\
+\[ \frac{\text{Cases}(\text{Cancer}, \text{Dyspnoea}, \text{X-ray}_{\text{positive}}, \lnot \text{Smoker}, \text{Pollution}_{\text{low}})}{\text{Cases}(\text{Cancer}, \text{Dyspnoea}, \text{X-ray}_{\text{positive}}, \lnot \text{Smoker}, \text{Pollution}_{\text{low}}) + \text{Cases}(\lnot \text{Cancer}, \text{Dyspnoea}, \text{X-ray}_{\text{positive}}, \lnot \text{Smoker}, \text{Pollution}_{\text{low}})} \]\\
+\begin{adjustbox}{max width=1.25\textwidth}
+    \parbox{1.25\textwidth}{\begin{align*}
+    = \frac{ P(\text{Cancer} \mid (\lnot \text{Smoker} \land \text{Pollution}_{\text{low}})) \cdot P(\text{Dyspnoea} \mid \text{Cancer}) \cdot P(\text{X-ray}_{\text{positive}} \mid \text{Cancer}) \cdot P(\lnot \text{Smoker}) \cdot P(\text{Pollution}_{\text{low}}) }{(P(\text{Cancer} \mid (\lnot \text{Smoker} \land \text{Pollution}_{\text{low}})) \cdot P(\text{Dyspnoea} \mid \text{Cancer}) \cdot P(\text{X-ray}_{\text{positive}} \mid \text{Cancer}) \cdot P(\lnot \text{Smoker}) \cdot P(\text{Pollution}_{\text{low}})) + (P(\lnot \text{Cancer} \mid (\lnot \text{Smoker} \land \text{Pollution}_{\text{low}})) \cdot P(\text{Dyspnoea} \mid \lnot \text{Cancer}) \cdot P(\text{X-ray}_{\text{positive}} \mid \lnot \text{Cancer}) \cdot P(\lnot \text{Smoker}) \cdot P(\text{Pollution}_{\text{low}}))}.
+    \end{align*}}
+
+\end{adjustbox}
 
 % \subsection{Sub Section 1}
 % \label{sub_sec:sub_section_1}
