@@ -1,0 +1,58 @@
+\lesson{Fri, 3 November 2023, 11:40am -- 1:00pm}{Week 10, Friday}
+
+\section{Speech Recognition}\label{sub:speech_recognition}
+
+The general flow for the process of speech recognition is: analog speech signal $\overset{\text{signal processing}}{\rightarrow}$ digital speech signal $\overset{\text{machine learning model}}{\rightarrow}$ word sequence.
+
+Using Bayes's rule, it's possible to find $P(\text{Words} \mid \text{Signal})$, where $P(\text{Words})$ is the language model and $P(\text{Signal} \mid \text{Words})$ is the acoustic model. The language model provides the likelihood of word sequences (eg, the words `recognise speech' may be a more appropriate caption generated from some audio than `wreck a nice beach'), and the acoustic model provides the likelihood of the signal given the word sequence (eg, given the word `nice', we may find the likelihood that it is pronounced like some audio). This overall speech recognition model is $\hat{W} = \underset{W \in L}{\arg \max} \frac{P(O \mid W)P(W)}{P(O)} \propto \underset{W \in L}{\arg \max} P(O \mid W)P(W)$, where $O$ is the observed signal, $W$ is the word sequence, $L$ is the set of all possible word sequences, $P(O \mid W)$ is the acoustic model (ie, observation likelihood), $P(W)$ is the language model, and $\hat{W} = \underset{W \in L}{\arg \max}$ is the `best match' metric. We may ignore the $P(O)$ as it would be the same for every word sequence; it is a constant.
+
+$P(\text{Words})$ is a joint probability, and can be expressed using the chain rule---$P(w_{1}, w_{2}, \ldots, w_{n}) = P(w_{1})P(w_{2} \mid w_{1}) P(w_{3} \mid w_{1}w_{2}) \ldots P(w_{n} \mid w_{1}, \ldots, w_{n-1})$. This isn't feasible to compute, so \textbf{first-order Markov assumption} is used. This is the relationship that $P(w_{i} \mid w_{1}, \ldots, w_{i-1}) \approx P(w_{i} \mid w_{i-1})$, essentially claiming that the past and future are roughly independent. This simplifies the language model into the \textbf{bigram model}, $P(w_{1}, w_{2}, \ldots, w_{n}) = P(w_{1})P(w_{2} \mid w_{1}) P(w_{3} \mid w_{2}) \ldots P(w_{n} \mid w_{n-1})$, which relates consecutive pairs of words. The \textbf{trigram model} considers a two-word \textbf{context window} (ie, $P(w_{i} \mid w_{1}, \ldots, w_{i-1}) \approx P(w_{i} \mid w_{i-1}, w_{i-2})$). A unigram model's probabilities would simply be $P(w_{i}) = \frac{1}{|L|}$ (ie, all words in the language's dictionary are equally likely, as no context is being considered). Accuracy of the probabilities increases as the context window increases, but the computational complexity increases as well. A language model's \emph{prediction accuracy} improves given more training data and parameters.
+
+The acoustic model has two parts, being $P(\text{Sounds} \mid \text{Word})$ (which may be specified as a Markov model; the probability of a sequence of sounds given $\text{Word}$), and $P(\text{Signal} \mid \text{Sounds})$ (which may be specified as a \textbf{hidden Markov model}; the probability of some digital signal values given a sequence of sounds).
+
+% \subsection{Sub Section 1}
+% \label{sub_sec:sub_section_1}
+
+% \begin{theorem}
+% This is a theorem.
+% \end{theorem}
+% \begin{proof}
+% This is a proof.
+% \end{proof}
+% \begin{example}
+% This is an example.
+% \end{example}
+% \begin{explanation}
+% This is an explanation.
+% \end{explanation}
+% \begin{claim}
+% This is a claim.
+% \end{claim}
+% \begin{corollary}
+% This is a corollary.
+% \end{corollary}
+% \begin{prop}
+% This is a proposition.
+% \end{prop}
+% \begin{lemma}
+% This is a lemma.
+% \end{lemma}
+% \begin{question}
+% This is a question.
+% \end{question}
+% \begin{solution}
+% This is a solution.
+% \end{solution}
+% \begin{exercise}
+% This is an exercise.
+% \end{exercise}
+% \begin{definition}[Definition]
+% This is a definition.
+% \end{definition}
+% \begin{note}
+% This is a note.
+% \end{note}
+
+% subsection sub_section_1 (end)
+
+\newpage
