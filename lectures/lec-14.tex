@@ -6,25 +6,36 @@ One may think of facial recognition as a template matching problem, where:
 
 \begin{enumerate}
     \item We obtain training data of face images---all centred and of the same size---being $I_{1}, I_{2}, \ldots, I_{M}$.
-    \item We represent every image $I_{i}$ as a vector $\varGamma_{i}$---ie, an $N \times N$ square image (represented as a matrix) is transformed into an $N^{2} \times 1$ column vector.
-    \item We compute the average face vector, $\varPsi = \frac{1}{M} \overset{M}{\underset{i=1}{\sum}} \varGamma_{i}$.
-    \item We subtract the mean face from each face; $\varPhi_{i} = \varGamma_{i} - \varPsi$.
-    \item We compute the covariance matrix, $C = \frac{1}{M} \overset{M}{\underset{n=1}{\sum}} \varPhi_{n} \varPhi_{n}^{T} = A A^{T}$ (resulting in an $N^{2} \times N^{2}$ matrix), where $A = \begin{bmatrix} \varPhi_{1} & \varPhi_{2} & \cdots & \varPhi_{M} \end{bmatrix}$ (an $N^{2} \times M$ matrix). This is a reduction of the data into lower-dimensional space.
+    \item We represent every image $I_{i}$ as a vector $\Gamma_{i}$---ie, an $N \times N$ square image (represented as a matrix) is transformed into an $N^{2} \times 1$ column vector.
+    \item We compute the average face vector, $\Psi = \frac{1}{M} \overset{M}{\underset{i=1}{\sum}} \Gamma_{i}$.
+    \item We subtract the mean face from each face; $\Phi_{i} = \Gamma_{i} - \Psi$.
+    \item We compute the covariance matrix, $C = \frac{1}{M} \overset{M}{\underset{n=1}{\sum}} \Phi_{n} \Phi_{n}^{T} = A A^{T}$ (resulting in an $N^{2} \times N^{2}$ matrix), where $A = \begin{bmatrix} \Phi_{1} & \Phi_{2} & \cdots & \Phi_{M} \end{bmatrix}$ (an $N^{2} \times M$ matrix). This is a reduction of the data into lower-dimensional space.
     \item We compute the eigenvectors $u_{i}$ of $A A^{T}$:
     \begin{enumerate}
         \item If we consider $A^{T} A$ (an $M \times M$ matrix), we can compute the eigenvectors, $\nu_{i}$ of $A^{T} A$.
-        \item $A^{T} A \nu_{i} = \mu_{i} \nu_{i} \Rightarrow A A^{T} A \nu_{i} = \mu_{i} A \nu_{i} \Rightarrow C A \nu_{i} = \mu_{i} A \nu_{i}$; we may express $A \nu_{i}$ as $u_{i}$. $A A^{T}$ (which may have up to $N^{2}$ eigenvalues and eigenvectors), and $A^{T} A$ (which may have up to $M$ eigenvalues and eigenvectors) have the same eigenvalues, and their eigenvectors are related by $u_{i} = A \nu_{i}$. The $M$ eigenvalues of $A^{T} A$, along with their related eigenvectors, correspond to the $M$ \emph{largest} eigenvalues \& eigenvectors of $A A^{T}$.
+        \item $A^{T} A \nu_{i} = \mu_{i} \nu_{i} \Rightarrow A A^{T} A \nu_{i} = \mu_{i} A \nu_{i} \Rightarrow C A \nu_{i} = \mu_{i} A \nu_{i}$; we may express $A \nu_{i}$ as $u_{i}$. $A A^{T}$ (which may have up to $N^{2}$ eigenvalues and eigenvectors), and $A^{T} A$ (which may have up to $M$ eigenvalues and eigenvectors) have the same non-zero eigenvalues, and their eigenvectors are related by $u_{i} = A \nu_{i}$. The $M$ eigenvalues of $A^{T} A$, along with their related eigenvectors, correspond to the $M$ \emph{largest} eigenvalues \& eigenvectors of $A A^{T}$.
         \item We compute the $M$ best eigenvectors of $A A^{T}: u_{i} = A \nu_{i}$, where $u_{i}$ has been normalised such that $\Vert u_{i} \Vert = 1$.
     \end{enumerate}
     \item We keep the eigenvectors associated with the $K$ largest eigenvalues.
 \end{enumerate}
 
-Each normalised face, $\varPhi_{i}$, in the training data set is a linear combination of the $K$ best eigenvectors; $\hat{\varPhi}_{i} - \varPsi = \overset{K}{\underset{j=1}{\sum}} w_{j} u_{j}$, where $w_{j} = u_{j}^{T} \varPhi_{i}$---the $u_{j}$s are called \textbf{eigenfaces}. Our basis vector, $\Omega_{i}$, represents each normalised training face, where $\Omega_{i} = \begin{bmatrix}w_{1}^{i}\\w_{2}^{i}\\ \vdots\\ w_{K}^{i} \end{bmatrix}, i = 1, 2, \ldots, M$.
+Each normalised face, $\Phi_{i}$, in the training data set is a linear combination of the $K$ best eigenvectors; $\hat{\Phi}_{i} - \Psi = \overset{K}{\underset{j=1}{\sum}} w_{j} u_{j}$, where $w_{j} = u_{j}^{T} \Phi_{i}$---the $u_{j}$s are called \textbf{eigenfaces}. Our basis vector, $\Omega_{i}$, represents each normalised training face, where $\Omega_{i} = \begin{bmatrix}w_{1}^{i}\\w_{2}^{i}\\ \vdots\\ w_{K}^{i} \end{bmatrix}, i = 1, 2, \ldots, M$.
 
-Given $\varGamma$, an unrecognised, centred face image of the same size as the training images, we may perform facial recognition using the following steps:
+Given $\Gamma$, an unrecognised, centred face image of the same size as the training images, we may perform facial recognition using the following steps:
 \begin{enumerate}
-    \item Normalise $\varGamma: \varPhi = \varGamma - \varPsi$.
-    \item Considering that $u_{i}$ is $N^{2} \times 1$, and $u_{i}^{T} \varPhi$ is $N^{2} \times 1$, we project onto the eigenspace $\hat{\varPhi} = \overset{K}{\underset{j=1}{\sum}} w_{i} u_{i}$.
+    \item Normalise $\Gamma: \Phi = \Gamma - \Psi$.
+    \item Considering that $u_{i}$ is $N^{2} \times 1$, and $u_{i}^{T} \Phi$ is $N^{2} \times 1$, we project onto the eigenspace $\hat{\Phi} = \overset{K}{\underset{j=1}{\sum}} w_{i} u_{i}$, where $w_{i} = u_{i}^{T} \Phi$.
+    \item We represent $\Phi$ as $\Omega = \begin{bmatrix}w_{1}\\w_{2}\\ \vdots\\ w_{K} \end{bmatrix}$.
+    \item We compute the minimum Mahalanobis distance within the face space between the $\Omega$s of the training images and the $\Omega$ of the unrecognised image; $e_{r} = \min_{l} \Vert \Omega - \Omega^{l} \Vert = \sum_{i=1}^{K} \frac{1}{\lambda_{i}} (w_{i} - w_{i}^{l})^{2}$. Each face cluster (ie, each $\Omega^{l}$) is calculated from several images of the same face in the training set.
+    \item If $e_{r} < T_{r}$, where $T_{r}$ is a threshold, then the unrecognised image is recognised as face $l$ from the training set.
+\end{enumerate}
+
+Detecting whether or not a face is present in an image, $\Gamma$, follows a similar process:
+\begin{enumerate}
+    \item Compute $\Phi = \Gamma - \Psi$.
+    \item Compute $\hat{\Phi} = \overset{K}{\underset{i=1}{\sum}} w_{i} u_{i}$, where $w_{i} = u_{i}^{T} \Phi$.
+    \item Compute the distance from the face space, $e_{d} = \Vert \Phi - \hat{\Phi} \Vert$.
+    \item If $e_{d} < T_{d}$, where $T_{d}$ is a threshold, then $\Gamma$ is an image of a face.
 \end{enumerate}
 
 % \subsection{Sub Section 1}
